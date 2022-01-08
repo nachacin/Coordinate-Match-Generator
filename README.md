@@ -17,12 +17,12 @@ are referring to the same object.
 
 Problem:  
 Given,  
-    1) Maximum disagreement between the sensors is 100 metres. If a set of 
+    1. Maximum disagreement between the sensors is 100 metres. If a set of 
     coordinates in the CSV file is within 100 metres of a set in the JSON
-    file, these coordinates belong to the same object.  
-    2) All objects are more than 100 metres apart at any time.  
+    file, these coordinates belong to the same object, and  
+    2. All objects are more than 100 metres apart at any time,  
 
-Process the coordinates from the two files to determine which object IDs from 
+process the coordinates from the two files to determine which object IDs from 
 the two datasets correspond to the same object, and which IDs are unique to either
 dataset (objects that were missed by the other sensor). Generate the output as a .txt
 file with the following format:
