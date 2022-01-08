@@ -3,7 +3,7 @@
 This repository contains two different implementations that were used
 as a submission for a coding challenge.
 
-Context:
+Context:  
 A program is required to process 2 files of different formats (one CSV, 
 the other JSON) as input. The files contain coordinate data (WGS 84) corresponding
 to flying objects on the earth. Each file is meant to represent incoming data from
@@ -15,12 +15,12 @@ may have assigned a different ID to an object during operation without synchroni
 Therefore, ID alone cannot be used to determine if coordinates from the two sensors 
 are referring to the same object.
 
-Problem:
-Given,
+Problem:  
+Given,  
     1) Maximum disagreement between the sensors is 100 metres. If a set of 
     coordinates in the CSV file is within 100 metres of a set in the JSON
-    file, these coordinates belong to the same object.
-    2) All objects are more than 100 metres apart at any time.
+    file, these coordinates belong to the same object.  
+    2) All objects are more than 100 metres apart at any time.  
 
 Process the coordinates from the two files to determine which object IDs from 
 the two datasets correspond to the same object, and which IDs are unique to either
