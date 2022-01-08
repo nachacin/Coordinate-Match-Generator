@@ -46,14 +46,14 @@ GNU make utility in your system.
 
 If you do not have GNU make, these commands will create an equivalent build:
 
-gcc -Wall -g -Iheader -c src/smallAngleDistance.c -o obj/smallAngleDistance.o
-gcc -Wall -g -Iheader -c src/outputGenerator.c -o obj/outputGenerator.o
-gcc -Wall -g -Iheader -c src/main.c -o obj/main.o
-gcc -Wall -g -Iheader -c src/coordinatesJSONparser.c -o obj/coordinatesJSONparser.o
-gcc -Wall -g -Iheader -c src/linkedListQueue.c -o obj/linkedListQueue.o
-gcc -Wall -g -Iheader -c src/coordinatesCSVparser.c -o obj/coordinatesCSVparser.o
-gcc -Wall -g -Iheader -c src/linkedList.c -o obj/linkedList.o
-gcc -Wall -g -Iheader  obj/smallAngleDistance.o  obj/outputGenerator.o  obj/main.o  obj/coordinatesJSONparser.o  obj/linkedListQueue.o  obj/coordinatesCSVparser.o  obj/linkedList.o -o bin/main
+gcc -Wall -g -Iheader -c src/smallAngleDistance.c -o obj/smallAngleDistance.o  
+gcc -Wall -g -Iheader -c src/outputGenerator.c -o obj/outputGenerator.o  
+gcc -Wall -g -Iheader -c src/main.c -o obj/main.o  
+gcc -Wall -g -Iheader -c src/coordinatesJSONparser.c -o obj/coordinatesJSONparser.o  
+gcc -Wall -g -Iheader -c src/linkedListQueue.c -o obj/linkedListQueue.o  
+gcc -Wall -g -Iheader -c src/coordinatesCSVparser.c -o obj/coordinatesCSVparser.o  
+gcc -Wall -g -Iheader -c src/linkedList.c -o obj/linkedList.o  
+gcc -Wall -g -Iheader  obj/smallAngleDistance.o  obj/outputGenerator.o  obj/main.o  obj/coordinatesJSONparser.o  obj/linkedListQueue.o  obj/coordinatesCSVparser.o  obj/linkedList.o -o bin/main  
 
 You should be able to copy and paste those lines onto the command line and press enter
 to complete the build.
