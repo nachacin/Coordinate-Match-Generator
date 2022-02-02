@@ -14,6 +14,7 @@ public class ThreadController {
     private static Thread JSON_read_thread;
     private static Thread matcher_thread;
     private static Thread coor_printer_thread;
+    private static Thread coor_writer_thread;
     private static final String[] JSON_filenames = {
             "input-easy1.json",
             "input-easy2.json",
@@ -34,7 +35,7 @@ public class ThreadController {
         coorQueue = new LinkedBlockingQueue<>(QUEUE_SIZE);
         createAndStartReaders(JSON_filenames[selection], CSV_filenames[selection]);
         createAndStartMatcher();
-        createAndStartPrinters(coorMatcher.getMatchQueue());
+        createAndStartWriters(coorMatcher.getMatchQueue());
 
         try {
             CSV_read_thread.join();
@@ -52,10 +53,11 @@ public class ThreadController {
             e.printStackTrace();
         }
         try {
-            coor_printer_thread.join();
+            coor_writer_thread.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
         System.out.println("ThreadController Finished");
     }
 
@@ -75,6 +77,10 @@ public class ThreadController {
     private static void createAndStartPrinters(BlockingQueue<List<Coordinates>> matchQueue) {
         coor_printer_thread = new Thread(new CoordinatesPrinter(matchQueue), "Coor-Print");
         coor_printer_thread.start();
+    }
+    private static void createAndStartWriters(BlockingQueue<List<Coordinates>> matchQueue) {
+        coor_writer_thread = new Thread(new CoordinatesWriter(matchQueue), "Coor-Write");
+        coor_writer_thread.start();
     }
 
     public static boolean areReadersAlive() {

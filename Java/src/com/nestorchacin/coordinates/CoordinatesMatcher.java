@@ -31,8 +31,8 @@ public class CoordinatesMatcher implements Runnable{
             Coordinates coordinate = intakeQueue.poll();
             if (coordinate == null && !ThreadController.areReadersAlive()) {
                 System.out.println(Thread.currentThread().getName()+" finished");
-                CoordinatesPrinter.rake(unmatched_CSV_coors);
-                CoordinatesPrinter.rake(unmatched_JSON_coors);
+                CoordinatesWriter.rake(unmatched_JSON_coors);
+                CoordinatesWriter.rake(unmatched_CSV_coors);
                 return;
             }
             if (coordinate != null) {
