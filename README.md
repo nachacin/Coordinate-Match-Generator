@@ -2,7 +2,7 @@
 
 This repository contains three different implementations that were used
 as a submission for a coding challenge. Each implementation uses a different language
-to provide a solution.
+to provide a solution (Python, C, and Java).
 
 Context:  
 A program is required to process 2 files of different formats (one CSV, 
