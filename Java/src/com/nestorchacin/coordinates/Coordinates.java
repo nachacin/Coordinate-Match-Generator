@@ -10,12 +10,30 @@ public class Coordinates {
     private double latitude;
     private double longitude;
     private Source source;
+    private CoorMatchStat status;
 
     public Coordinates (int id, double latitude, double longitude, Source source) {
         this.id = id;
         this.latitude = latitude;
         this.longitude = longitude;
         this.source = source;
+        this.status = CoorMatchStat.UNMATCHED;
+    }
+
+    public CoorMatchStat getStat() {
+        return this.status;
+    }
+
+    public void setMatched() {
+        this.status = CoorMatchStat.MATCHED;
+    }
+
+    public Source getSource() {
+        return this.source;
+    }
+
+    public int getId() {
+        return this.id;
     }
 
     @Override

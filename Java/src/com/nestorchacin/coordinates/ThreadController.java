@@ -2,14 +2,17 @@ package com.nestorchacin.coordinates;
 
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
-import java.util.concurrent.BlockingDeque;
-import java.util.concurrent.LinkedBlockingDeque;
+import java.util.List;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class ThreadController {
     private static final int QUEUE_SIZE = 5;
-    private static BlockingDeque<Coordinates> coorQueue;
+    private static BlockingQueue<Coordinates> coorQueue;
+    private static CoordinatesMatcher coorMatcher;
     private static Thread CSV_read_thread;
     private static Thread JSON_read_thread;
+    private static Thread matcher_thread;
     private static Thread coor_printer_thread;
     private static final String[] JSON_filenames = {
             "input-easy1.json",
@@ -28,9 +31,10 @@ public class ThreadController {
 
     public static void main(String[] args) {
         int selection = Integer.parseInt(args[0]) - 1;
-        coorQueue = new LinkedBlockingDeque<Coordinates>(QUEUE_SIZE);
+        coorQueue = new LinkedBlockingQueue<>(QUEUE_SIZE);
         createAndStartReaders(JSON_filenames[selection], CSV_filenames[selection]);
-        createAndStartPrinters();
+        createAndStartMatcher();
+        createAndStartPrinters(coorMatcher.getMatchQueue());
 
         try {
             CSV_read_thread.join();
@@ -39,6 +43,11 @@ public class ThreadController {
         }
         try {
             JSON_read_thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        try {
+            matcher_thread.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -58,8 +67,13 @@ public class ThreadController {
         JSON_read_thread.start();
         CSV_read_thread.start();
     }
-    private static void createAndStartPrinters() {
-        coor_printer_thread = new Thread(new CoordinatePrinter(coorQueue), "Coor-Print");
+    private static void createAndStartMatcher() {
+        coorMatcher = new CoordinatesMatcher(coorQueue);
+        matcher_thread = new Thread(coorMatcher, "coor-matcher");
+        matcher_thread.start();
+    }
+    private static void createAndStartPrinters(BlockingQueue<List<Coordinates>> matchQueue) {
+        coor_printer_thread = new Thread(new CoordinatesPrinter(matchQueue), "Coor-Print");
         coor_printer_thread.start();
     }
 
