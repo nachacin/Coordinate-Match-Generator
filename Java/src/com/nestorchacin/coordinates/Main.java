@@ -8,39 +8,32 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URISyntaxException;
+import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
     private static final String[] JSON_filenames = {
-            "/input-easy1.json",
-            "/input-easy2.json",
-            "/problem1.json",
-            "/problem2.json",
-            "/problem3.json"
+            "input-easy1.json",
+            "input-easy2.json",
+            "problem1.json",
+            "problem2.json",
+            "problem3.json"
     };
     private static final String [] CSV_filenames = {
-            "/input-easy1.csv",
-            "/input-easy2.csv",
-            "/problem1.csv",
-            "/problem2.csv",
-            "/problem3.csv"
+            "input-easy1.csv",
+            "input-easy2.csv",
+            "problem1.csv",
+            "problem2.csv",
+            "problem3.csv"
     };
 
     public static void main(String[] args) {
         int selection = Integer.parseInt(args[0]) - 1;
         List<Coordinates> coors = new ArrayList<>();
-//        File csvData = null;
-//        try {
-//            File csvData = new File(Main.class.getResource(CSV_filenames[selection]).toURI().getPath());
-//        } catch (URISyntaxException e) {
-//            e.printStackTrace();
-//        }
-//        CSVcoorParser csvCoorParser = new CSVcoorParser(csvData);
         try {
-            File csvData = new File(Main.class.getResource(CSV_filenames[selection]).toURI().getPath());
+            File csvData = new File(URLDecoder.decode(Main.class.getClassLoader().getResource(CSV_filenames[selection]).getPath(), StandardCharsets.UTF_8));
             CSVParser csv_parser = CSVParser.parse(csvData, StandardCharsets.UTF_8 ,CSVFormat.EXCEL.withHeader());
             for (CSVRecord record : csv_parser) {
                 coors.add(new Coordinates(
@@ -52,8 +45,6 @@ public class Main {
             csv_parser.close();
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
         }
         for (Coordinates coordinate: coors) {
             System.out.println(coordinate);
@@ -61,12 +52,10 @@ public class Main {
 
         JSONcoorParser parser = new JSONcoorParser();
         try {
-            InputStream input = new FileInputStream(Main.class.getResource(JSON_filenames[selection]).toURI().getPath());
+            InputStream input = new FileInputStream(URLDecoder.decode(Main.class.getClassLoader().getResource(JSON_filenames[selection]).getPath(), StandardCharsets.UTF_8));
             coors = parser.readJsonStream(input);
             input.close();
         } catch (IOException | NullPointerException e) {
-            e.printStackTrace();
-        } catch (URISyntaxException e) {
             e.printStackTrace();
         }
         for (Coordinates coordinate: coors) {

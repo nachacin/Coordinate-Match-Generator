@@ -82,7 +82,8 @@ public class JSONcoorParser implements Runnable {
                 }
             }
             this.reader.endArray();
-            System.out.println((Thread.currentThread().getName()+" finished"));
+            input.close();
+            System.out.println(Thread.currentThread().getName()+" finished");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
