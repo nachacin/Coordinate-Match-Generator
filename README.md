@@ -1,7 +1,8 @@
 # Coordinate Match Generator
 
-This repository contains two different implementations that were used
-as a submission for a coding challenge.
+This repository contains three different implementations that were used
+as a submission for a coding challenge. Each implementation uses a different language
+to provide a solution.
 
 Context:  
 A program is required to process 2 files of different formats (one CSV, 
@@ -34,12 +35,20 @@ should be reported as a -1.
 
 IMPLEMENTATION COMMENTS
 
-Firstly, I mainly focused on implementing a build that could process data 
-quickly in C. The python folder contains my initial efforts to explore the
-problem and make error comparisons between my algorithms of choice and established
-geolocation libraries, such as Geopy. If there is interest in my approach to data
-analysis with the use of numpy, matplotlib and pandas, see the 'python' folder. 
-Otherwise, one may focus on the 'c' folder.
+I mainly focused on implementing a build that could process data 
+quickly in C and Java. The python version was made during exploratory programming, as I
+tried to get acquainted with the data and test different algorithms. If there is interest
+in my approach to data analysis with the use of numpy, matplotlib and pandas, see the 
+'python' folder.  The C version was an attempt to implement the solution acquired 
+previously that was compileable, more performant, and multithreaded. Achieving the last 
+goal proved to be quite a challenge and, in efforts to keep data structures lean and 
+readable, the program's efficiency takes a hit. Although the solution may be performant 
+enough given an appropriate setting, I do not think it performs well enough to justify 
+such a low-level programming approach. So finally, I wrote a final version of the 
+program in Java. It uses the java Thread API to make file reading, writting, and data processing 
+components multithreaded. Thus reducing the amount of wasted comparisons and iterations by
+a significant margin. At this time, I consider this to be my best solutionamong the three.
+
 
 I have included a Makefile, making compilation easy if you have installed the
 GNU make utility in your system.
